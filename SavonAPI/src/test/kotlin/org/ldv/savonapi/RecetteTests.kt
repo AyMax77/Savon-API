@@ -83,8 +83,8 @@ class RecetteTests(
     @Test
     fun `test calculNonPondere`() {
         savon.calculNonPondere()
-        val iode = savon.resultats.find { it.caracteristique?.nom == "Iode" }?.score!!
-        val ins = savon.resultats.find { it.caracteristique?.nom == "Indice INS" }?.score!!
+        val iode = savon.resultats.find { it.caracteristique?.nom == "iode" }?.score!!
+        val ins = savon.resultats.find { it.caracteristique?.nom == "ins" }?.score!!
 
         assertEquals(43.5f, iode, 0.1f, "Le score iode doit être correct")
         assertEquals(179.5f, ins, 0.1f, "Le score INS doit être correct")
@@ -94,13 +94,13 @@ class RecetteTests(
     fun `test calculPondere`() {
         savon.calculPondere()
 
-        val douceur = savon.resultats.find { it.caracteristique?.nom == "Douceur" }?.score!!
-        val lavant = savon.resultats.find { it.caracteristique?.nom == "Lavant" }?.score!!
-        val volMousse = savon.resultats.find { it.caracteristique!!.nom == "Volume de mousse" }?.score!!
-        val tenueMousse = savon.resultats.find { it.caracteristique!!.nom == "Tenue de mousse" }?.score!!
-        val durete = savon.resultats.find { it.caracteristique!!.nom == "Dureté" }?.score!!
-        val solubilite = savon.resultats.find { it.caracteristique!!.nom == "Solubilité" }?.score!!
-        val sechage = savon.resultats.find { it.caracteristique!!.nom == "Séchage" }?.score!!
+        val douceur = savon.resultats.find { it.caracteristique?.nom == "douceur" }?.score!!
+        val lavant = savon.resultats.find { it.caracteristique?.nom == "lavant" }?.score!!
+        val volMousse = savon.resultats.find { it.caracteristique!!.nom == "vol mousse" }?.score!!
+        val tenueMousse = savon.resultats.find { it.caracteristique!!.nom == "tenue mousse" }?.score!!
+        val durete = savon.resultats.find { it.caracteristique!!.nom == "durete" }?.score!!
+        val solubilite = savon.resultats.find { it.caracteristique!!.nom == "solubilite" }?.score!!
+        val sechage = savon.resultats.find { it.caracteristique!!.nom == "sechage" }?.score!!
 
         assertEquals(9.138174f, douceur, 0.001f, "Le score douceur doit être correct")
         assertEquals(11.585531f, lavant, 0.001f, "Le score lavant doit être correct")

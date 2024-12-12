@@ -10,7 +10,7 @@ class Resultat(
     var resultatId : ResultatId,
     var score : Float,
 
-    @MapsId("RecetteId")
+    @MapsId("recetteId")
     @ManyToOne
     @JoinColumn(name = "recette_id")
     var recette : Recette?=null,
@@ -19,7 +19,7 @@ class Resultat(
     @JoinColumn(name = "mention_id")
     var mention : Mention? =null,
 
-    @MapsId("CaracteristiqueId")
+    @MapsId("caracteristiqueId")
     @ManyToOne
     @JoinColumn(name = "caracteristique_id")
     var caracteristique : Caracteristique?

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 interface MentionDAO : JpaRepository<Mention, Long> {
-    @Query("SELECT m FROM Mention m WHERE m.caracteristique = :caracteristique AND :score BETWEEN m .noteMin AND m.noteMax")
+    @Query("SELECT m FROM Mention m WHERE m.caracteristique = :caracteristique AND :score BETWEEN m .scoreMin AND m.scoreMax")
     fun findMentionsByScoreAndCaracteristique(
         @Param("score") score : Float,
         @Param("caracteristique") caracteristique: Caracteristique

@@ -26,15 +26,15 @@ class Recette(
 
 ) {
     fun calculQteAlcalin(){
-        var qteAlcalinNormal = 0.0F
+        var qteAlcalinNormal = 0.0
         if(avecSoude == true){
-            qteAlcalinNormal = this.ligneIngredients.sumOf{qteAlcalin*it.ingredient!!.sapo*(40.0/56/1000)}.toFloat()
+            qteAlcalinNormal = this.ligneIngredients.sumOf{(it.quantite*it.ingredient!!.sapo*(40.0/56.0/1000.0))}
         } else {
-            qteAlcalinNormal = this.ligneIngredients.sumOf { (qteAlcalin *it.ingredient!!.sapo)/1000}.toFloat()
+            qteAlcalinNormal = this.ligneIngredients.sumOf { (it.quantite*it.ingredient!!.sapo)/1000.0}
         }
-        qteAlcalin = concentrationAlcalin/100
+        var qteAlcalin = qteAlcalinNormal/(concentrationAlcalin/100.0)
         qteAlcalin = qteAlcalin - (qteAlcalin*(surgraissage/100))
-        qteAlcalin = qteAlcalin.toFloat()
+        this.qteAlcalin = qteAlcalin.toFloat()
     }
 
     fun calculApportEau(){
@@ -61,7 +61,7 @@ class Recette(
     fun calculPondere(){
         var douceur = this.ligneIngredients.sumOf { it.ingredient!!.douceur*it.pourcentage/100 }
         var lavant = this.ligneIngredients.sumOf { it.ingredient!!.lavant*it.pourcentage/100 }
-        var volmousse = this.ligneIngredients.sumOf { it.ingredient!!.volMousse*it.pourcentage/100 }
+        var volMousse = this.ligneIngredients.sumOf { it.ingredient!!.volMousse*it.pourcentage/100 }
         var tenueMousse = this.ligneIngredients.sumOf { it.ingredient!!.tenueMousse*it.pourcentage/100 }
         var durete = this.ligneIngredients.sumOf { it.ingredient!!.durete*it.pourcentage/100 }
         var solubilite = this.ligneIngredients.sumOf { it.ingredient!!.solubilite*it.pourcentage/100 }
@@ -69,7 +69,7 @@ class Recette(
 
         douceur = douceur*(1+0.01494*surgraissage)
         lavant = lavant*(1+-0.01203*surgraissage)
-        volmousse = volmousse*(1+-0.00702*surgraissage)
+        volMousse = volMousse*(1+-0.00702*surgraissage)
         tenueMousse = tenueMousse*(1+0.01016*surgraissage)
         durete = durete*(1+-0.00602*surgraissage)
         solubilite = solubilite*(1+0.00250*surgraissage)
@@ -77,8 +77,8 @@ class Recette(
 
         this.resultats.find { it.caracteristique!!.nom=="douceur" }!!.score=douceur.toFloat()
         this.resultats.find { it.caracteristique!!.nom=="lavant" }!!.score=lavant.toFloat()
-        this.resultats.find { it.caracteristique!!.nom=="volMousse" }!!.score=volmousse.toFloat()
-        this.resultats.find { it.caracteristique!!.nom=="tenueMousse" }!!.score=tenueMousse.toFloat()
+        this.resultats.find { it.caracteristique!!.nom=="vol mousse" }!!.score=volMousse.toFloat()
+        this.resultats.find { it.caracteristique!!.nom=="tenue mousse" }!!.score=tenueMousse.toFloat()
         this.resultats.find { it.caracteristique!!.nom=="durete" }!!.score=durete.toFloat()
         this.resultats.find { it.caracteristique!!.nom=="solubilite" }!!.score=solubilite.toFloat()
         this.resultats.find { it.caracteristique!!.nom=="sechage" }!!.score=sechage.toFloat()

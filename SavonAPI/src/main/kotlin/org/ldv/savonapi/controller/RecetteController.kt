@@ -1,5 +1,6 @@
 package org.ldv.savonapi.controller
 
+import org.ldv.savonapi.DTO.RecetteFormDTO
 import org.ldv.savonapi.model.dao.MentionDAO
 import org.ldv.savonapi.model.dao.RecetteDAO
 import org.ldv.savonapi.model.entity.Recette
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -35,6 +38,7 @@ class RecetteController (
             ResponseEntity.notFound().build()
         }
     }
+
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id:Long):ResponseEntity<Void>{
         return if (recetteDAO.existsById(id)){
@@ -43,5 +47,10 @@ class RecetteController (
         } else{
             ResponseEntity.notFound().build()
         }
+    }
+@PostMapping
+    fun store(@RequestBody recetteFormDTO : RecetteFormDTO) : ResponseEntity<Recette>{
+        var savedRecette = simulateurService.toRecette(recetteFormDTO)
+        return  ResponseEntity.status(HttpStatus.CREATED).body(savedRecette)
     }
 }
