@@ -10,18 +10,19 @@ import jakarta.persistence.OneToMany
 class Recette(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id : Long?=null,
     var description: String,
     var avecSoude : Boolean,
     var concentrationAlcalin : Float,
     var qteAlcalin : Float,
-    var id : Long?,
+
     var titre : String,
     var apportEnEau : Float,
     var surgraissage : Float,
     @OneToMany(mappedBy = "recette")
-    var ligneIngredients : MutableList<LigneIngredient>,
+    var ligneIngredients : MutableList<LigneIngredient> = mutableListOf(),
     @OneToMany(mappedBy = "recette")
-    var resultats : MutableList<Resultat>
+    var resultats : MutableList<Resultat> = mutableListOf()
 
 
 ) {
